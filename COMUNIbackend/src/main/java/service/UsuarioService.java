@@ -12,12 +12,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import facade.ActorFacade;
-import model.Actor;
-import model.Film;
+import facade.UsuarioFacade;
+import model.Usuario;
+//import model.Film;
 
 @Path("/usuarios")
-public class ActorService {
+public class UsuarioService {
 	
 	@EJB 
 	UsuarioFacade usuarioEJB;
@@ -33,7 +33,7 @@ public class ActorService {
 	@GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Actor find(@PathParam("id") Integer id) {
+    public Usuario find(@PathParam("id") Integer id) {
         return usuarioEJB.find(id);
     }
 	
@@ -51,7 +51,9 @@ public class ActorService {
     	usuarioEJB.edit(entity);
     }
     
-    @PUT
+    
+    /*
+    @PUT 
     @Path("{id}/{nombre}/{apellido}")
     @Consumes({"application/xml", "application/json"})
     public void edit(@PathParam("id", "nombre", "apellido") Integer id, String nombre, String apellido, Usuario entity) {
@@ -59,6 +61,8 @@ public class ActorService {
     	entity.setUserNombre(nombre.StringValue());
     	usuarioEJB.edit(entity);
     }
+    */
+    
     /*
     @GET
     @Path("{id}/films")

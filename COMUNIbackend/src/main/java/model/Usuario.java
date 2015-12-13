@@ -14,14 +14,13 @@ import java.util.List;
 @Entity
 @Table(name="usuario")
 @NamedQuery(name="usuario.findAll", query="SELECT a FROM usuario a")
-public class Actor implements Serializable {
+public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name="ID_USUARIO", unique=true, nullable=false)
 	private int userId;
 	
-	@IdComuna
 	@Column(name="ID_COMUNA", nullable=false)
 	private int userIdComuna;
 
@@ -54,8 +53,8 @@ public class Actor implements Serializable {
 	private Timestamp lastUpdate;
 	*/
 
-	public Usuario() {
-	}
+	//public class Usuario() {
+	//}
 
 	public int getUserId() {
 		return this.userId;
@@ -65,7 +64,7 @@ public class Actor implements Serializable {
 		return this.userIdComuna;
 	}
 	
-	public int setUserIdComuna(int newIdComuna) {
+	public void setUserIdComuna(int newIdComuna) {
 		 this.userIdComuna = newIdComuna;
 	}
 	

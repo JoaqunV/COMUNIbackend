@@ -4,10 +4,10 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import model.Actor;
+import model.Usuario;
 
 @Local
-public interface ActorFacade {
+public interface UsuarioFacade {
 
 	public void create(Usuario entity);
 
@@ -15,7 +15,7 @@ public interface ActorFacade {
 
 	public void remove(Usuario entity);
 
-	public Actor find(Object id);
+	public Usuario find(Object id);
 
 	public List<Usuario> findAll();
 
