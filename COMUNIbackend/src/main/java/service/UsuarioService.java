@@ -14,7 +14,6 @@ import javax.ws.rs.Produces;
 
 import facade.UsuarioFacade;
 import model.Usuario;
-//import model.Film;
 
 @Path("/usuarios")
 public class UsuarioService {
