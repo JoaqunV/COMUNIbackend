@@ -19,7 +19,7 @@ public class Usuario implements Serializable {
 
 	@Id
 	@Column(name="ID_EVENTO", unique=true, nullable=false)
-	private int eventID;
+	private int eventId;
 	
 	@Column(name="ID_CATEGORIA", nullable=false)
 	private int eventCatId;
@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
 	private String eventTitulo;
 
 	@Column(name="HORAINICIO", nullable=false, length=20)
-	private String eventHoraInciio;
+	private String eventHoraInicio;
 	
 	@Column(name="HORAFIN", nullable=false, length=20)
 	private String eventHoraFin;
@@ -60,85 +60,111 @@ public class Usuario implements Serializable {
 	public class Evento() {
 	}
 
-	public int getUserId() {
-		return this.userId;
+	public int getEventId() {
+		return this.eventId;
 	}
 	
-	public int getUserIdComuna() {
-		return this.userIdComuna;
+	public void setEventId(int newId) {
+		this.eventId = newId;
 	}
 	
-	public void setUserIdComuna(int newIdComuna) {
-		 this.userIdComuna = newIdComuna;
+	// *** Por mientras incluiré categoría aca, hasta corregir la BD porque esta debe ser una relación muchos a muchos contenida en un modelo Evento_categoria.
+	public int getEventCategoriaID() {
+		return this.eventCatId;
 	}
 	
-	public void setUserId(int newId) {
-		this.userId = newId;
+	public void setEventCategoriaID(int newIdCategoria) {
+		 this.eventCatId = newIdCategoria;
+	}
+	//*** FIN
+
+	public int getEventoComunaId() {
+		return this.eventComId;
 	}
 
-	public int getTipo() {
-		return this.userTipo;
-	}
-
-	public void setTipo(int tipoUser) {
-		this.userTipo = tipoUser;
+	public void setEventoComunaId(int newIdEventoComuna) {
+		this.eventComId = newIdEventoComuna;
 	}	
 	
-	public String getNombre() {
-		return this.userNombre;
+	public String getTitulo() {
+		return this.eventTitulo;
 	}
 
-	public void setNombre(String name) {
-		this.userNombre = name;
+	public void setTitulo(String name) {
+		this.eventTitulo = name;
 	}
 
-	public String getApellido() {
-		return this.userApellido;
+	public String getHoraInicio() {
+		return this.eventHoraInicio;
 	}
 
-	public void setApellido(String newApellido) {
-		this.userApellido = newApellido;
+	public void setHoraInicio(String newHora) {
+		this.eventHoraInicio = newHora;
 	}
 	
-	public String getPassword() {
-		return this.userPassword;
+	public String getHoraTermino() {
+		return this.eventHoraFin;
 	}
 
-	public void setPassword(String newPassword) {
-		this.userPassword = newPassword;
+	public void setHoraTermino(String newhoraFin) {
+		this.eventHoraFin = newhoraFin;
 	}
 	
-	public String getEmail() {
-		return this.userEmail;
-	}
-
-	public void setEmail(String newEmail) {
-		this.userEmail = newEmail;
-	}
-	
-	public String getFechaNac() {
-		return this.userNacimiento;
-	}
-
-	public void setFechaNac(String newFecha) {
-		this.userNacimiento = newFecha;
-	}
-
 	public String getDireccion() {
-		return this.userDireccion;
+		return this.eventDireccion;
 	}
 
 	public void setDireccion(String newDireccion) {
-		this.userDireccion = newDireccion;
+		this.eventDireccion = newDireccion;
 	}
 	
-	public String getTelefono() {
-		return this.userTelefono;
+	public String getLatitud() {
+		return this.eventLatitud;
 	}
 
-	public void setTelefono(String newTelefono) {
-		this.userTelefono = newTelefono;
+	public void setLatitud(String newLatitud) {
+		this.eventLatitud = newLatitud;
 	}
+	
+	public String getLongitud() {
+		return this.eventLongitud;
+	}
+
+	public void setLongitud(String newLongitud) {
+		this.eventLongitud = newLongitud;
+	}
+
+	public String getPathImagen() {
+		return this.eventPathImg;
+	}
+
+	public void setPathImagen(String newPathImg) {
+		this.eventPathImg = newPathImg;
+	}
+	
+	public String getDescripcion() {
+		return this.eventDescripcion;
+	}
+
+	public void setDescripcion(String newDescripcion) {
+		this.eventDescripcion = newDescripcion;
+	}
+	
+	public String getPupolaridad() {
+		return this.eventPopularidad;
+	}
+
+	public void setPopularidad(String newPopularidad) {
+		this.eventPopularidad = newPopularidad;
+	}
+	
+	public int getEstado() {
+		return this.eventEstado;
+	}
+
+	public void setEventoComunaId(int newEstate) {
+		this.eventEstado = newEstate;
+	}	
 	
 	/*
 	public Timestamp getLastUpdate() {

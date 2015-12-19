@@ -19,9 +19,9 @@ import model.Evento;
 public class EventoService {
 	
 	@EJB 
-	UsuarioFacade eventoEJB;
+	EventoFacade eventoEJB;
 	
-	Logger logger = Logger.getLogger(UsuarioService.class.getName());
+	Logger logger = Logger.getLogger(EventoService.class.getName());
 	
 	@GET
 	@Produces({"application/xml", "application/json"})

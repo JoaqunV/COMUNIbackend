@@ -5,8 +5,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import facade.AbstractFacade;
-import facade.UsuarioFacade;
-import model.Usuario;
+import facade.EventoFacade;
+import model.Evento;
 
 @Stateless
 public class EventoEJB extends AbstractFacade<Evento> implements EventoFacade {

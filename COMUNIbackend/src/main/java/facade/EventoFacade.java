@@ -7,19 +7,19 @@ import javax.ejb.Local;
 import model.Evento;
 
 @Local
-public interface UsuarioFacade {
+public interface EventoFacade {
 
-	public void create(Usuario entity);
+	public void create(Evento entity);
 
-	public void edit(Usuario entity);
+	public void edit(Evento entity);
 
-	public void remove(Usuario entity);
+	public void remove(Evento entity);
 
-	public Usuario find(Object id);
+	public Evento find(Object id);
 
-	public List<Usuario> findAll();
+	public List<Evento> findAll();
 
-	public List<Usuario> findRange(int[] range);
+	public List<Evento> findRange(int[] range);
 
 	public int count();
 
