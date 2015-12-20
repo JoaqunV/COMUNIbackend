@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name="evento")
 @NamedQuery(name="Evento.findAll", query="SELECT a FROM Evento a")
-public class Usuario implements Serializable {
+public class Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -57,8 +57,9 @@ public class Usuario implements Serializable {
 	@Column(name="POPULARIDAD", nullable=false, length=30)
 	private String eventPopularidad;
 
-	public class Evento() {
-	}
+	/*
+	 * public class Evento() {
+	}*/
 
 	public int getEventId() {
 		return this.eventId;
@@ -162,7 +163,7 @@ public class Usuario implements Serializable {
 		return this.eventEstado;
 	}
 
-	public void setEventoComunaId(int newEstate) {
+	public void setEventoEstado(int newEstate) {
 		this.eventEstado = newEstate;
 	}	
 	
@@ -194,5 +195,4 @@ public class Usuario implements Serializable {
 		return lista;
 	}
 	*/
-
 }
