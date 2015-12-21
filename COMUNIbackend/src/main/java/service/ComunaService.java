@@ -12,42 +12,42 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import facade.ComentarioFacade;
-import model.Comentario;
+import facade.ComunaFacade;
+import model.Comuna;
 
-@Path("/comentarios")
-public class ComentarioService {
+@Path("/comunas")
+public class ComunaService {
 	
 	@EJB 
-	ComentarioFacade comentarioEJB;
+	ComunaFacade comunaEJB;
 	
-	Logger logger = Logger.getLogger(ComentarioService.class.getName());
+	Logger logger = Logger.getLogger(ComunaService.class.getName());
 	
 	@GET
 	@Produces({"application/xml", "application/json"})
-	public List<Comentario> findAll(){
-		return comentarioEJB.findAll();
+	public List<Comuna> findAll(){
+		return comunaEJB.findAll();
 	}
 	
 	@GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Comentario find(@PathParam("id") Integer id) {
-        return comentarioEJB.find(id);
+    public Comuna find(@PathParam("id") Integer id) {
+        return comunaEJB.find(id);
     }
 	
 	@POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Comentario entity) {
-		comentarioEJB.create(entity);
+    public void create(Comuna entity) {
+		comunaEJB.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Integer id, Comentario entity) {
-    	entity.setComentarioId(id.intValue());
-    	comentarioEJB.edit(entity);
+    public void edit(@PathParam("id") Integer id, Comuna entity) {
+    	entity.setComunaId(id.intValue());
+    	comunaEJB.edit(entity);
     }
     
     

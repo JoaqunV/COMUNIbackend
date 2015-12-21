@@ -21,7 +21,7 @@ public class CategoriaService {
 	@EJB 
 	CategoriaFacade categoriaEJB;
 	
-	Logger logger = Logger.getLogger(EventoService.class.getName());
+	Logger logger = Logger.getLogger(CategoriaService.class.getName());
 	
 	@GET
 	@Produces({"application/xml", "application/json"})

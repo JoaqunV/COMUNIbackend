@@ -5,17 +5,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import facade.AbstractFacade;
-import facade.ComentarioFacade;
-import model.Comentario;
+import facade.ComunaFacade;
+import model.Comuna;
 
 @Stateless
-public class ComentarioEJB extends AbstractFacade<Comentario> implements ComentarioFacade {
+public class ComunaEJB extends AbstractFacade<Comuna> implements ComunaFacade {
+	
 	
 	@PersistenceContext(unitName = "comuniPU")
 	private EntityManager em;
 	
-	public ComentarioEJB() {
-		super(Comentario.class);
+	public ComunaEJB() {
+		super(Comuna.class);
 	}
 
 	@Override

@@ -27,7 +27,7 @@ public class Comentario implements Serializable {
 	@Column(name="ID_USUARIO", nullable=false)
 	private int comentarioUserId;
 
-	@Column(name="TEXTOCOMENTARIO", nullable=false )
+	@Column(name="TEXTOCOMENTARIO", nullable=false, length=200)
 	private String comentarioTexto;
 
 	@Column(name="FECHACOMENTARIO", nullable=false, length=100)
