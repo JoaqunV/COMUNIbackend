@@ -168,15 +168,7 @@ public class Evento implements Serializable {
 	}	
 	
 	/*
-	public Timestamp getLastUpdate() {
-		return this.lastUpdate;
-	}
-	
-	public void setLastUpdate(Timestamp lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
-	
-	@OneToMany(mappedBy="actor")
+	@OneToMany(mappedBy="EVENTO")
 	private List<Film_Actor> films;
 	
 	List<Film_Actor> getFilms() {
