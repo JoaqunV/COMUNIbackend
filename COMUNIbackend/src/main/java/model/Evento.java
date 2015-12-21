@@ -20,9 +20,6 @@ public class Evento implements Serializable {
 	@Id
 	@Column(name="ID_EVENTO", unique=true, nullable=false)
 	private int eventId;
-	
-	@Column(name="ID_CATEGORIA", nullable=false)
-	private int eventCatId;
 
 	@Column(name="ID_COMUNA", nullable=false )
 	private int eventComId;
@@ -57,10 +54,6 @@ public class Evento implements Serializable {
 	@Column(name="POPULARIDAD", nullable=false, length=30)
 	private String eventPopularidad;
 
-	/*
-	 * public class Evento() {
-	}*/
-
 	public int getEventId() {
 		return this.eventId;
 	}
@@ -68,16 +61,6 @@ public class Evento implements Serializable {
 	public void setEventId(int newId) {
 		this.eventId = newId;
 	}
-	
-	// *** Por mientras incluiré categoría aca, hasta corregir la BD porque esta debe ser una relación muchos a muchos contenida en un modelo Evento_categoria.
-	public int getEventCategoriaID() {
-		return this.eventCatId;
-	}
-	
-	public void setEventCategoriaID(int newIdCategoria) {
-		 this.eventCatId = newIdCategoria;
-	}
-	//*** FIN
 
 	public int getEventoComunaId() {
 		return this.eventComId;
@@ -167,24 +150,22 @@ public class Evento implements Serializable {
 		this.eventEstado = newEstate;
 	}	
 	
-	/*
-	@OneToMany(mappedBy="EVENTO")
-	private List<Film_Actor> films;
+	@OneToMany(mappedBy="evento")
+	private List<CategoriaEvento> categorias;
 	
-	List<Film_Actor> getFilms() {
-		return films;
+	List<CategoriaEvento> getCategorias() {
+		return categorias;
 	}
 
-	void setFilms(List<Film_Actor> films) {
-		this.films = films;
+	void setCategorias(List<CategoriaEvento> categorias) {
+		this.categorias = categorias;
 	}
 	
-	public List<Film> obtenerFilms(){
-		List<Film> lista = new ArrayList<Film>();
-		for(Film_Actor Film : this.films){
-			lista.add(Film.getFilm());
+	public List<Categoria> obtenerCategorias(){
+		List<Categoria> lista = new ArrayList<Categoria>();
+		for(CategoriaEvento Categoria : this.categorias){
+			lista.add(Categoria.getCategoria());
 		}
 		return lista;
 	}
-	*/
 }

@@ -14,6 +14,8 @@ import javax.ws.rs.Produces;
 
 import facade.CategoriaFacade;
 import model.Categoria;
+import model.Evento;
+import model.CategoriaEvento;
 
 @Path("/categorias")
 public class CategoriaService {
@@ -62,13 +64,11 @@ public class CategoriaService {
     }
     */
     
-    /*
     @GET
-    @Path("{id}/films")
+    @Path("{id}/eventos")
     @Produces({"application/xml", "application/json"})
-    public List<Film> find_films(@PathParam("id") Integer id) {
-        return actorFacadeEJB.find(id).obtenerFilms();
+    public List<Evento> find_eventos(@PathParam("id") Integer id) {
+        return categoriaEJB.find(id).obtenerEventos();
     }
-	*/
 
 }

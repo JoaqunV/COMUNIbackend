@@ -61,4 +61,23 @@ public class Categoria implements Serializable {
 	public void setCategoriaPopularidad(int newId) {
 		this.categoriaPopularidad = newId;
 	}
+	
+	@OneToMany(mappedBy="categoria")
+	private List<CategoriaEvento> eventos;
+	
+	List<CategoriaEvento> getEventos() {
+		return eventos;
+	}
+
+	void setEventos(List<CategoriaEvento> eventos) {
+		this.eventos = eventos;
+	}
+	
+	public List<Evento> obtenerEventos(){
+		List<Evento> lista = new ArrayList<Evento>();
+		for(CategoriaEvento Eventos : this.eventos){
+			lista.add(Eventos.getEvento());
+		}
+		return lista;
+	}
 }
