@@ -47,14 +47,6 @@ public class Usuario implements Serializable {
 	
 	@Column(name="TELEFONO", nullable=false, length=30)
 	private String userTelefono;
-	
-	/*
-	@Column(name="last_update", nullable=false)
-	private Timestamp lastUpdate;
-	*/
-
-	//public class Usuario() {
-	//}
 
 	public int getUserId() {
 		return this.userId;
