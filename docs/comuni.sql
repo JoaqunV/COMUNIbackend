@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-12-2015 a las 00:29:20
+-- Tiempo de generación: 21-12-2015 a las 04:38:51
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 5.6.15
 
@@ -19,86 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `comuni`
 --
-
-DELIMITER $$
---
--- Procedimientos
---
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarUsuario`(
-IN _idComuna int(11),
-IN _tipo int(11),
-IN _email varchar(50),
-IN _password varchar(50),
-IN _nombre varchar(100),
-IN _apellido varchar(120),
-IN _fechaNacimiento DATE,
-IN _direccionUsuario varchar(200),
-IN _telefono varchar(30) )
-
-BEGIN
-
-INSERT INTO `usuario` (`ID_USUARIO`, `ID_COMUNA`, `TIPO`, `EMAIL`, `PASSWORD`, `NOMBRE`, `APELLIDO`, `FECHANACIMIENTO`, `DIRECCIONUSUARIO`, `TELEFONO`) 
-	VALUES (null,_idComuna,_tipo,_email,_password,_nombre,_apellido,_fechaNacimiento,_direccionUsuario,_telefono);
-	
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarEvento`(
-IN _idCategoria int(11),
-IN _idComuna int(11),
-IN _titulo varchar(120),
-IN _horaInicio DATETIME,
-IN _horaFin DATETIME,
-IN _direccionEvento varchar(200),
-IN _latitud varchar(100),
-IN _longitud varchar(100),
-IN _pathImagen varchar(400),
-IN _descripcion varchar(500),
-IN _estado int(11))
-BEGIN
-
-INSERT INTO `evento` (`ID_EVENTO`, `ID_CATEGORIA`, `ID_COMUNA`, `TITULO`, `HORAINICIO`, `HORAFIN`, `DIRECCIONEVENTO`, `LATITUD`, `LONGITUD`, `PATHIMAGEN`, `DESCRIPCION`, `ESTADO`, `POPULARIDAD`) 
-	VALUES (null, _idCategoria, _idComuna, _titulo, _horaInicio, _horaFin, _direccionEvento, _latitud, _longitud, _pathImagen, _descripcion, _estado, 0);
-	
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarComentario`(
-IN _idUsuario int(11),
-IN _idEvento int(11),
-IN _textoComentario varchar(300) )
-
-BEGIN
-
-INSERT INTO `comentario` (`ID_COMENTARIO`, `ID_USUARIO`, `ID_EVENTO`, `TEXTOCOMENTARIO`, `FECHACOMENTARIO`) 
-	VALUES (NULL, _idUsuario, _idEvento, _textoComentario, CURRENT_TIMESTAMP);
-	
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `interesCategoria`(
-IN _idCategoria int(11),
-IN _idUsuario int(11) )
-
-BEGIN
-
-INSERT INTO `interesa` (`ID_CATEGORIA`, `ID_USUARIO`) 
-	VALUES (_idCategoria, _idUsuario);
-	
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `interesEvento`(
-IN _idEvento int(11),
-IN _idUsuario int(11) )
-
-BEGIN
-
-INSERT INTO `interesa2` (`ID_USUARIO`, `ID_EVENTO`) 
-	VALUES (_idUsuario, _idEvento);
-	
-UPDATE evento SET evento.popularidad = evento.popularidad + 1 where evento.ID_EVENTO=_idEvento;
-	
-END$$
-
-DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -124,6 +44,26 @@ INSERT INTO `categoria` (`ID_CATEGORIA`, `NOMBRE`, `DESCRIPCION`, `POPULARIDAD`)
 (4, 'Concierto', 'Conciertos a beneficio.', 0),
 (5, 'Partido de fútbol', 'Partidos de fútbol a beneficio.', 0),
 (6, 'Fiesta', 'Fiestas a beneficio.', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoriaevento`
+--
+
+CREATE TABLE `categoriaevento` (
+  `ID_CATEGORIA` int(11) NOT NULL,
+  `ID_EVENTO` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `categoriaevento`
+--
+
+INSERT INTO `categoriaevento` (`ID_CATEGORIA`, `ID_EVENTO`) VALUES
+(2, 1),
+(4, 3),
+(5, 2);
 
 -- --------------------------------------------------------
 
@@ -207,7 +147,6 @@ INSERT INTO `comuna` (`ID_COMUNA`, `NOMBRECOMUNA`) VALUES
 
 CREATE TABLE `evento` (
   `ID_EVENTO` int(11) NOT NULL,
-  `ID_CATEGORIA` int(11) NOT NULL,
   `ID_COMUNA` int(11) DEFAULT NULL,
   `TITULO` varchar(120) DEFAULT NULL,
   `HORAINICIO` datetime DEFAULT NULL,
@@ -225,27 +164,27 @@ CREATE TABLE `evento` (
 -- Volcado de datos para la tabla `evento`
 --
 
-INSERT INTO `evento` (`ID_EVENTO`, `ID_CATEGORIA`, `ID_COMUNA`, `TITULO`, `HORAINICIO`, `HORAFIN`, `DIRECCIONEVENTO`, `LATITUD`, `LONGITUD`, `PATHIMAGEN`, `DESCRIPCION`, `ESTADO`, `POPULARIDAD`) VALUES
-(1, 2, 5, 'Gran cicletada a beneficio', '2015-12-26 13:00:00', '2015-12-26 20:00:00', '5 de Abril 5040', '-33.464437', '-70.704141', 'img1.jpg', 'Este 26 de diciembre se realizará una gran cicletada a beneficio en la comuna de estación central!', 0, 2),
-(2, 5, 22, 'Partido de leyendas a beneficio', '2016-02-17 12:00:00', '2016-02-17 18:00:00', 'Eliodoro Yañez 2035', '-33.431210', '-70.608281', 'img2.jpg', 'No te pierdas el partido de futbol a beneficio!', 0, 1),
-(3, 4, 25, 'Concierto a beneficio', '2016-04-01 19:00:00', '2016-04-01 23:00:00', 'Martínez de Rozas 4533', '-33.435443', '-70.697271', 'img3.jpg', 'Muchos artistas invitados a este gran concierto a beneficio.', 0, 0);
+INSERT INTO `evento` (`ID_EVENTO`, `ID_COMUNA`, `TITULO`, `HORAINICIO`, `HORAFIN`, `DIRECCIONEVENTO`, `LATITUD`, `LONGITUD`, `PATHIMAGEN`, `DESCRIPCION`, `ESTADO`, `POPULARIDAD`) VALUES
+(1, 5, 'Gran cicletada a beneficio', '2015-12-26 13:00:00', '2015-12-26 20:00:00', '5 de Abril 5040', '-33.464437', '-70.704141', 'img1.jpg', 'Este 26 de diciembre se realizará una gran cicletada a beneficio en la comuna de estación central!', 0, 2),
+(2, 22, 'Partido de leyendas a beneficio', '2016-02-17 12:00:00', '2016-02-17 18:00:00', 'Eliodoro Yañez 2035', '-33.431210', '-70.608281', 'img2.jpg', 'No te pierdas el partido de futbol a beneficio!', 0, 1),
+(3, 25, 'Concierto a beneficio', '2016-04-01 19:00:00', '2016-04-01 23:00:00', 'Martínez de Rozas 4533', '-33.435443', '-70.697271', 'img3.jpg', 'Muchos artistas invitados a este gran concierto a beneficio.', 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `interesa`
+-- Estructura de tabla para la tabla `interesacategoria`
 --
 
-CREATE TABLE `interesa` (
+CREATE TABLE `interesacategoria` (
   `ID_CATEGORIA` int(11) NOT NULL,
   `ID_USUARIO` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `interesa`
+-- Volcado de datos para la tabla `interesacategoria`
 --
 
-INSERT INTO `interesa` (`ID_CATEGORIA`, `ID_USUARIO`) VALUES
+INSERT INTO `interesacategoria` (`ID_CATEGORIA`, `ID_USUARIO`) VALUES
 (1, 5),
 (1, 6),
 (2, 1),
@@ -257,19 +196,19 @@ INSERT INTO `interesa` (`ID_CATEGORIA`, `ID_USUARIO`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `interesa2`
+-- Estructura de tabla para la tabla `interesaevento`
 --
 
-CREATE TABLE `interesa2` (
+CREATE TABLE `interesaevento` (
   `ID_USUARIO` int(11) NOT NULL,
   `ID_EVENTO` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `interesa2`
+-- Volcado de datos para la tabla `interesaevento`
 --
 
-INSERT INTO `interesa2` (`ID_USUARIO`, `ID_EVENTO`) VALUES
+INSERT INTO `interesaevento` (`ID_USUARIO`, `ID_EVENTO`) VALUES
 (2, 1),
 (3, 2),
 (7, 1);
@@ -283,21 +222,20 @@ INSERT INTO `interesa2` (`ID_USUARIO`, `ID_EVENTO`) VALUES
 CREATE TABLE `notificacion` (
   `ID_NOTIFICACION` int(11) NOT NULL,
   `ID_USUARIO` int(11) DEFAULT NULL,
-  `ID_TIPO` int(11) DEFAULT NULL,
+  `ID_EVENTO` int(11) DEFAULT NULL,
+  `ID_TIPONOTIFICACION` int(11) DEFAULT NULL,
   `TEXTONOTIFICACION` varchar(140) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `sugerencia`
+-- Volcado de datos para la tabla `notificacion`
 --
 
-CREATE TABLE `sugerencia` (
-  `ID_SUGERENCIA` int(11) NOT NULL,
-  `ID_USUARIORECEPTOR` int(11) NOT NULL,
-  `ID_USUARIO` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `notificacion` (`ID_NOTIFICACION`, `ID_USUARIO`, `ID_EVENTO`, `ID_TIPONOTIFICACION`, `TEXTONOTIFICACION`) VALUES
+(1, 2, 3, 2, 'textoNotificacion1'),
+(2, 4, 1, 3, 'textoNotificacion2'),
+(3, 6, 1, 1, 'textoNotificacion3'),
+(4, 3, NULL, 3, 'textoNotificacion4');
 
 -- --------------------------------------------------------
 
@@ -306,9 +244,18 @@ CREATE TABLE `sugerencia` (
 --
 
 CREATE TABLE `tiponotificacion` (
-  `ID_TIPO` int(11) NOT NULL,
+  `ID_TIPONOTIFICACION` int(11) NOT NULL,
   `DESCRIPCION` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tiponotificacion`
+--
+
+INSERT INTO `tiponotificacion` (`ID_TIPONOTIFICACION`, `DESCRIPCION`) VALUES
+(1, 'tipoNotificacion1'),
+(2, 'tipoNotificacion2'),
+(3, 'tipoNotificacion3');
 
 -- --------------------------------------------------------
 
@@ -353,6 +300,13 @@ ALTER TABLE `categoria`
   ADD PRIMARY KEY (`ID_CATEGORIA`);
 
 --
+-- Indices de la tabla `categoriaevento`
+--
+ALTER TABLE `categoriaevento`
+  ADD PRIMARY KEY (`ID_CATEGORIA`,`ID_EVENTO`),
+  ADD KEY `FK_TIENE7` (`ID_EVENTO`);
+
+--
 -- Indices de la tabla `comentario`
 --
 ALTER TABLE `comentario`
@@ -371,20 +325,19 @@ ALTER TABLE `comuna`
 --
 ALTER TABLE `evento`
   ADD PRIMARY KEY (`ID_EVENTO`),
-  ADD KEY `FK_TIENE2` (`ID_COMUNA`),
-  ADD KEY `FK_TIENE6` (`ID_CATEGORIA`);
+  ADD KEY `FK_TIENE2` (`ID_COMUNA`);
 
 --
--- Indices de la tabla `interesa`
+-- Indices de la tabla `interesacategoria`
 --
-ALTER TABLE `interesa`
+ALTER TABLE `interesacategoria`
   ADD PRIMARY KEY (`ID_CATEGORIA`,`ID_USUARIO`),
   ADD KEY `FK_INTERESA2` (`ID_USUARIO`);
 
 --
--- Indices de la tabla `interesa2`
+-- Indices de la tabla `interesaevento`
 --
-ALTER TABLE `interesa2`
+ALTER TABLE `interesaevento`
   ADD PRIMARY KEY (`ID_USUARIO`,`ID_EVENTO`),
   ADD KEY `FK_INTERESA4` (`ID_EVENTO`);
 
@@ -394,20 +347,14 @@ ALTER TABLE `interesa2`
 ALTER TABLE `notificacion`
   ADD PRIMARY KEY (`ID_NOTIFICACION`),
   ADD KEY `FK_RECIBE` (`ID_USUARIO`),
-  ADD KEY `FK_TIENE5` (`ID_TIPO`);
-
---
--- Indices de la tabla `sugerencia`
---
-ALTER TABLE `sugerencia`
-  ADD PRIMARY KEY (`ID_SUGERENCIA`,`ID_USUARIORECEPTOR`),
-  ADD KEY `FK_REALIZA2` (`ID_USUARIO`);
+  ADD KEY `FK_TIENE5` (`ID_TIPONOTIFICACION`),
+  ADD KEY `FK_TIENE8` (`ID_EVENTO`);
 
 --
 -- Indices de la tabla `tiponotificacion`
 --
 ALTER TABLE `tiponotificacion`
-  ADD PRIMARY KEY (`ID_TIPO`);
+  ADD PRIMARY KEY (`ID_TIPONOTIFICACION`);
 
 --
 -- Indices de la tabla `usuario`
@@ -444,17 +391,12 @@ ALTER TABLE `evento`
 -- AUTO_INCREMENT de la tabla `notificacion`
 --
 ALTER TABLE `notificacion`
-  MODIFY `ID_NOTIFICACION` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `sugerencia`
---
-ALTER TABLE `sugerencia`
-  MODIFY `ID_SUGERENCIA` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_NOTIFICACION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `tiponotificacion`
 --
 ALTER TABLE `tiponotificacion`
-  MODIFY `ID_TIPO` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_TIPONOTIFICACION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
@@ -463,6 +405,13 @@ ALTER TABLE `usuario`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `categoriaevento`
+--
+ALTER TABLE `categoriaevento`
+  ADD CONSTRAINT `FK_TIENE6` FOREIGN KEY (`ID_CATEGORIA`) REFERENCES `categoria` (`ID_CATEGORIA`),
+  ADD CONSTRAINT `FK_TIENE7` FOREIGN KEY (`ID_EVENTO`) REFERENCES `evento` (`ID_EVENTO`);
 
 --
 -- Filtros para la tabla `comentario`
@@ -475,20 +424,19 @@ ALTER TABLE `comentario`
 -- Filtros para la tabla `evento`
 --
 ALTER TABLE `evento`
-  ADD CONSTRAINT `FK_TIENE2` FOREIGN KEY (`ID_COMUNA`) REFERENCES `comuna` (`ID_COMUNA`),
-  ADD CONSTRAINT `FK_TIENE6` FOREIGN KEY (`ID_CATEGORIA`) REFERENCES `categoria` (`ID_CATEGORIA`);
+  ADD CONSTRAINT `FK_TIENE2` FOREIGN KEY (`ID_COMUNA`) REFERENCES `comuna` (`ID_COMUNA`);
 
 --
--- Filtros para la tabla `interesa`
+-- Filtros para la tabla `interesacategoria`
 --
-ALTER TABLE `interesa`
+ALTER TABLE `interesacategoria`
   ADD CONSTRAINT `FK_INTERESA` FOREIGN KEY (`ID_CATEGORIA`) REFERENCES `categoria` (`ID_CATEGORIA`),
   ADD CONSTRAINT `FK_INTERESA2` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID_USUARIO`);
 
 --
--- Filtros para la tabla `interesa2`
+-- Filtros para la tabla `interesaevento`
 --
-ALTER TABLE `interesa2`
+ALTER TABLE `interesaevento`
   ADD CONSTRAINT `FK_INTERESA3` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID_USUARIO`),
   ADD CONSTRAINT `FK_INTERESA4` FOREIGN KEY (`ID_EVENTO`) REFERENCES `evento` (`ID_EVENTO`);
 
@@ -497,13 +445,8 @@ ALTER TABLE `interesa2`
 --
 ALTER TABLE `notificacion`
   ADD CONSTRAINT `FK_RECIBE` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID_USUARIO`),
-  ADD CONSTRAINT `FK_TIENE5` FOREIGN KEY (`ID_TIPO`) REFERENCES `tiponotificacion` (`ID_TIPO`);
-
---
--- Filtros para la tabla `sugerencia`
---
-ALTER TABLE `sugerencia`
-  ADD CONSTRAINT `FK_REALIZA2` FOREIGN KEY (`ID_USUARIO`) REFERENCES `usuario` (`ID_USUARIO`);
+  ADD CONSTRAINT `FK_TIENE5` FOREIGN KEY (`ID_TIPONOTIFICACION`) REFERENCES `tiponotificacion` (`ID_TIPONOTIFICACION`),
+  ADD CONSTRAINT `FK_TIENE8` FOREIGN KEY (`ID_EVENTO`) REFERENCES `evento` (`ID_EVENTO`);
 
 --
 -- Filtros para la tabla `usuario`
