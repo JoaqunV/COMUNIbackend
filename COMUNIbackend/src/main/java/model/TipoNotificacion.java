@@ -24,9 +24,6 @@ public class TipoNotificacion implements Serializable {
 	@Column(name="DESCRIPCION", nullable=false, length=100)
 	private String tiponotificacionDescripcion;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "ID_TIPONOTIFICACION")
-	private TipoNotificacion tipoNotificacion;
-	
 	public int getTipoNotificacionId() {
 		return this.tiponotificacionId;
 	}
@@ -41,13 +38,5 @@ public class TipoNotificacion implements Serializable {
 	
 	public void setTipoNotificacionDescripcion(String newText){
 		this.tiponotificacionDescripcion = newText;
-	}
-	
-	public TipoNotificacion getTipoNotificacion() {
-		return tipoNotificacion;
-	}
-
-	public void setTipoNotificacion(TipoNotificacion tipoNotificacion) {
-		this.tipoNotificacion = tipoNotificacion;
 	}
 }

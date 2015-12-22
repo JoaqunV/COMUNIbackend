@@ -53,7 +53,11 @@ public class Evento implements Serializable {
 	
 	@Column(name="POPULARIDAD", nullable=false, length=30)
 	private String eventPopularidad;
-
+	
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name="ID_COMUNA", referencedColumnName = "ID_COMUNA")
+	private Comuna comuna;
+	
 	public int getEventId() {
 		return this.eventId;
 	}
@@ -168,4 +172,14 @@ public class Evento implements Serializable {
 		}
 		return lista;
 	}
+	
+	public Comuna getComuna() {
+		return comuna;
+	}
+
+	public void setComuna(Comuna comuna) {
+		this.comuna = comuna;
+	}
+	
+	
 }

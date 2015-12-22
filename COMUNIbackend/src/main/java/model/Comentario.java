@@ -33,6 +33,14 @@ public class Comentario implements Serializable {
 	@Column(name="FECHACOMENTARIO", nullable=false, length=100)
 	private String comentarioFecha;
 	
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name="ID_EVENTO", referencedColumnName = "ID_EVENTO")
+	private Evento evento;
+	
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name="ID_USUARIO", referencedColumnName = "ID_USUARIO")
+	private Usuario usuario;
+	
 	public int getComentarioId() {
 		return this.comentarioId;
 	}
@@ -71,6 +79,22 @@ public class Comentario implements Serializable {
 	
 	public void setFechaComentario(String newFecha){
 		this.comentarioFecha = newFecha;
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 	
 }

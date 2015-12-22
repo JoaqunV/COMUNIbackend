@@ -32,7 +32,7 @@ public class Comuna implements Serializable {
 		this.comunaId = newId;
 	}
 	
-	public String setNombreComuna(){
+	public String getNombreComuna(){
 		return this.comunaNombre;
 	}
 	

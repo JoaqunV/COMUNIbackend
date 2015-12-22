@@ -52,17 +52,16 @@ public class UsuarioService {
     
     
     /*
-    @PUT 
+    @GET 
     @Path("{id}/{nombre}/{apellido}")
-    @Consumes({"application/xml", "application/json"})
+    @Produces({"application/xml", "application/json"})
     public void edit(@PathParam("id", "nombre", "apellido") Integer id, String nombre, String apellido, Usuario entity) {
     	entity.setUserNombre(nombre.StringValue());
     	entity.setUserNombre(nombre.StringValue());
     	usuarioEJB.edit(entity);
     }
-    */
     
-    /*
+   
     @GET
     @Path("{id}/films")
     @Produces({"application/xml", "application/json"})
