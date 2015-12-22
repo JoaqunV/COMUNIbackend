@@ -26,7 +26,7 @@ public class InteresEvento implements Serializable {
 	private int interesEventoIdUser;
 	
 	@ManyToOne
-	@PrimaryKeyJoinColumn(name="ID_EVENTO", referencedColumnName = "ID_evento")
+	@PrimaryKeyJoinColumn(name="ID_EVENTO", referencedColumnName = "ID_EVENTO")
 	private Evento evento;
 	
 	@ManyToOne
