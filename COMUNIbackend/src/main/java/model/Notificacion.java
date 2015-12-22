@@ -26,8 +26,9 @@ public class Notificacion implements Serializable {
 	
 	@Column(name="ID_USUARIO", nullable=false)
 	private int notificacionUserId;
-
-	@Column(name="ID_TIPONOTIFICACION", nullable=false)
+	
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name="ID_TIPONOTIFICACION", referencedColumnName = "ID_TIPONOTIFICACION")
 	private int notificacionTipo;
 	
 	@Column(name="TEXTONOTIFICACION", nullable=false, length=200)
@@ -71,25 +72,5 @@ public class Notificacion implements Serializable {
 	
 	public void setTextoNotificacion(String newText){
 		this.notificacionTexto = newText;
-	}
-	
-	@ManyToOne(optional=false, targetEntity=TipoNotificacion.class)
-	@PrimaryKeyJoinColumn(name="ID_TIPONOTIFICACION", referencedColumnName = "ID_TIPONOTIFICACION")
-	private Notificacion notificacion;
-	
-	public Notificacion getNotificacion() {
-		return notificacion;
-	} 
-
-	public void setNotificacion(Notificacion notificacion) {
-		this.notificacion = notificacion;
-	}
-	
-	public List<TipoNotificacion> obtenerTiposNotificacion(){
-		List<TipoNotificacion> lista = new ArrayList<TipoNotificacion>();
-		for(TipoNotificacion Notificacion : this.notificacionTipo){
-			lista.add(Notificacion.getTipoNotificacion());
-		}
-		return lista;
 	}
 }

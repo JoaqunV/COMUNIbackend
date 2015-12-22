@@ -17,7 +17,7 @@ import java.util.List;
 public class TipoNotificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id @GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
 	@Column(name="ID_TIPONOTIFICACION", unique=true, nullable=false)
 	private int tiponotificacionId;
 
