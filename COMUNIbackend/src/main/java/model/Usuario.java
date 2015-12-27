@@ -18,35 +18,41 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ID_USUARIO", unique=true, nullable=false)
+	@Column(name="ID_USUARIO", unique=true, nullable=true)
 	private int userId;
 	
-	@Column(name="ID_COMUNA", nullable=false)
+	@Column(name="ID_COMUNA")
 	private int userIdComuna;
 
-	@Column(name="TIPO", nullable=false )
+	@Column(name="TIPO" )
 	private int userTipo;
 
-	@Column(name="NOMBRE", nullable=false, length=100)
+	@Column(name="NOMBRE", length=100)
 	private String userNombre;
 
-	@Column(name="APELLIDO", nullable=false, length=120)
+	@Column(name="APELLIDO", length=120)
 	private String userApellido;
 	
-	@Column(name="PASSWORD", nullable=false, length=50)
+	@Column(name="PASSWORD", length=50)
 	private String userPassword;
 	
-	@Column(name="EMAIL", nullable=false, length=50)
+	@Column(name="EMAIL", length=50)
 	private String userEmail;
 	
-	@Column(name="FECHANACIMIENTO", nullable=false, length=10)
+	@Column(name="FECHANACIMIENTO", length=10)
 	private String userNacimiento;
 	
-	@Column(name="DIRECCIONUSUARIO", nullable=false, length=200)
+	@Column(name="DIRECCIONUSUARIO", length=200)
 	private String userDireccion;
 	
-	@Column(name="TELEFONO", nullable=false, length=30)
+	@Column(name="TELEFONO", length=30)
 	private String userTelefono;
+	
+	@ManyToOne
+	@PrimaryKeyJoinColumn(name="ID_COMUNA", referencedColumnName = "ID_COMUNA")
+	private Comuna comuna;
+	
+	
 
 	public int getUserId() {
 		return this.userId;
@@ -128,33 +134,12 @@ public class Usuario implements Serializable {
 		this.userTelefono = newTelefono;
 	}
 	
-	/*
-	public Timestamp getLastUpdate() {
-		return this.lastUpdate;
-	}
-	
-	public void setLastUpdate(Timestamp lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
-	
-	@OneToMany(mappedBy="actor")
-	private List<Film_Actor> films;
-	
-	List<Film_Actor> getFilms() {
-		return films;
+	public Comuna getComuna() {
+		return comuna;
 	}
 
-	void setFilms(List<Film_Actor> films) {
-		this.films = films;
+	public void setComuna(Comuna comuna) {
+		this.comuna = comuna;
 	}
 	
-	public List<Film> obtenerFilms(){
-		List<Film> lista = new ArrayList<Film>();
-		for(Film_Actor Film : this.films){
-			lista.add(Film.getFilm());
-		}
-		return lista;
-	}
-	*/
-
 }

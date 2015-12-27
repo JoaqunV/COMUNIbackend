@@ -50,24 +50,11 @@ public class UsuarioService {
     	usuarioEJB.edit(entity);
     }
     
-    
-    /*
-    @GET 
-    @Path("{id}/{nombre}/{apellido}")
-    @Produces({"application/xml", "application/json"})
-    public void edit(@PathParam("id", "nombre", "apellido") Integer id, String nombre, String apellido, Usuario entity) {
-    	entity.setUserNombre(nombre.StringValue());
-    	entity.setUserNombre(nombre.StringValue());
-    	usuarioEJB.edit(entity);
+    @POST
+    @Path("/login")
+    @Consumes({"application/xml", "application/json"})
+    public int ingresar(Usuario entity) {
+		return usuarioEJB.Login(entity);
     }
-    
-   
-    @GET
-    @Path("{id}/films")
-    @Produces({"application/xml", "application/json"})
-    public List<Film> find_films(@PathParam("id") Integer id) {
-        return actorFacadeEJB.find(id).obtenerFilms();
-    }
-	*/
 
 }
