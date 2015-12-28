@@ -48,11 +48,11 @@ public class Evento implements Serializable {
 	@Column(name="DESCRIPCION", nullable=false, length=400)
 	private String eventDescripcion;
 	
-	@Column(name="ESTADO", nullable=false )
+	@Column(name="ESTADO" )
 	private int eventEstado;
 	
-	@Column(name="POPULARIDAD", nullable=false, length=30)
-	private String eventPopularidad;
+	@Column(name="POPULARIDAD")
+	private int eventPopularidad;
 	
 	@ManyToOne
 	@PrimaryKeyJoinColumn(name="ID_COMUNA", referencedColumnName = "ID_COMUNA")
@@ -138,11 +138,11 @@ public class Evento implements Serializable {
 		this.eventDescripcion = newDescripcion;
 	}
 	
-	public String getPupolaridad() {
+	public int getPupolaridad() {
 		return this.eventPopularidad;
 	}
 
-	public void setPopularidad(String newPopularidad) {
+	public void setPopularidad(int newPopularidad) {
 		this.eventPopularidad = newPopularidad;
 	}
 	
